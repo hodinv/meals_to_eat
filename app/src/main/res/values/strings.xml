@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MealsToEat</string>
+    <string name="app_name">Meals To Eat</string>
+    <string name="base_path">https://www.themealdb.com/api/json/v1/1/</string>
 </resources>

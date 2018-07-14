@@ -8,8 +8,8 @@ import io.reactivex.subjects.PublishSubject
 class DatabaseProvider
 private constructor(context: Context): Repository {
 
-    override fun getMealDao(): MealDao {
-        return db.getMealDao()
+    override fun getMealCategoryDao(): MealCategoryDao {
+        return db.getMealCategoryDao()
     }
 
     /**

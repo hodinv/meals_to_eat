@@ -1,9 +1,11 @@
 package com.hodinv.mealstoeat.screen.mealslist
 
+import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.model.repository.DatabaseProvider
 import com.hodinv.mealstoeat.mvp.BaseMvpFragment
 
 class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContract.Router, MealsListContract.Presenter>(), MealsListContract.View {
+
     override fun createPresenter(): MealsListContract.Presenter {
         return MealsListPresenter(DatabaseProvider.instance)
     }

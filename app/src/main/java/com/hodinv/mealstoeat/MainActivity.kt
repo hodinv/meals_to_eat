@@ -1,14 +1,27 @@
 package com.hodinv.mealstoeat
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import com.hodinv.mealstoeat.model.entity.MealCategory
+import com.hodinv.mealstoeat.screen.categories.CategoriesContract
+import com.hodinv.mealstoeat.screen.categories.CategoriesFragment
+import com.hodinv.mealstoeat.screen.meal.MealContract
+import com.hodinv.mealstoeat.screen.mealslist.MealsListContract
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListContract.Router, MealContract.Router {
+    override fun openCategory(category: MealCategory) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (!intent.hasExtra(EXTRA_TESTING)) {
+            startFragment(CategoriesFragment())
+        }
     }
 
 
@@ -16,7 +29,7 @@ class MainActivity : AppCompatActivity() {
      * Replace current content fragment with new one
      * @param newFragment fragment to show
      */
-    private fun startFragment(newFragment: Fragment) {
+    fun startFragment(newFragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, newFragment)
 
@@ -27,9 +40,20 @@ class MainActivity : AppCompatActivity() {
      * Adds current fragment ot back stack and shows new fragment
      * @param newFragment fragment to show
      */
-    private fun startFragmentWithStacking(newFragment: Fragment) {
+    fun startFragmentWithStacking(newFragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, newFragment).addToBackStack(null)
         transaction.commit()
+    }
+
+    companion object {
+
+        val EXTRA_TESTING = "testing"
+
+        fun testingIntent(context: Context): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra(EXTRA_TESTING, true)
+            return intent
+        }
     }
 }

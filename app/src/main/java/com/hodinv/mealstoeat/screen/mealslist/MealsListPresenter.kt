@@ -1,5 +1,6 @@
 package com.hodinv.mealstoeat.screen.mealslist
 
+import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.model.repository.Repository
 import com.hodinv.mealstoeat.mvp.BaseMvpPresenter
 
