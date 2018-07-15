@@ -29,10 +29,10 @@ class MealsListFragmentTest {
 
     val category = MealCategory(1, "", "", "")
 
-    val list =  listOf(
-            Meal(1, 1, "Meal1", ""),
-            Meal(2, 1, "Meal2", ""),
-            Meal(3, 1, "Meal3", "")
+    val list = listOf(
+            Meal(1, "Meal1", ""),
+            Meal(2, "Meal2", ""),
+            Meal(3, "Meal3", "")
     )
 
     @Rule

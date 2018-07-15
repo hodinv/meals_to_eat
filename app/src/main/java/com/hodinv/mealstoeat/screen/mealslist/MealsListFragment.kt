@@ -32,6 +32,12 @@ class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContr
         return this
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        activity?.setTitle(R.string.title_meals)
+    }
+
     override fun getRouter(): MealsListContract.Router {
         return activity as MealsListContract.Router
     }

@@ -12,4 +12,8 @@ interface MealsApi {
 
     @GET("filter.php")
     fun getMeals(@Query("c") category: String): Observable<MealsResponse>
+
+    @GET("lookup.php")
+    fun getMeal(@Query("i") idMeal: Int): Observable<MealsResponse>
+
 }

@@ -32,6 +32,11 @@ open class CategoriesFragment : BaseMvpFragment<CategoriesContract.View, Categor
         return activity as CategoriesContract.Router
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.setTitle(R.string.title_categories)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return LayoutInflater.from(activity).inflate(R.layout.fragment_categories, container, false)
     }

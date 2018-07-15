@@ -16,6 +16,9 @@ interface MealDao {
     @Query("SELECT * FROM Meal WHERE strCategory = :category")
     fun getMeals(category: String): Flowable<List<Meal>>
 
+    @Query("SELECT * FROM Meal where idMeal = :id")
+    fun getMeal(id: Int): Flowable<Meal>
+
     @Query("DELETE FROM Meal WHERE idMeal = :id")
     fun deleteMealById(id: Int)
 
