@@ -33,7 +33,7 @@ class CategoriesPresenter(val dao: MealCategoryDao, val api: MealsApi) :
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .zipWith(dao.getCategories().toObservable())
-                .subscribe {
+                .subscribe( {
                     var listToRemove = ArrayList<Int>()
 
                     for(oldItem in it.second) {
@@ -67,7 +67,10 @@ class CategoriesPresenter(val dao: MealCategoryDao, val api: MealsApi) :
                         dao.deleteCategoryById(itemId)
                     }
 
-                }
+                }, {
+                    // do nothing - should be already done from db
+                })
+
     }
 
     override fun onStop() {

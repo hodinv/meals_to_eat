@@ -10,6 +10,7 @@ import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
+import java.io.IOException
 
 
 class CategoriesPresenterTest {
@@ -69,6 +70,16 @@ class CategoriesPresenterTest {
         Mockito.verify(mealCategoryDao).addCategory(resposne.categories[1])
     }
 
+
+    @Test
+    fun testNoInternet() {
+        Mockito.`when`(api.getCategories()).thenReturn(Observable.error(IOException()))
+        Mockito.`when`(mealCategoryDao.getCategories()).thenReturn(Flowable.just(list))
+        presenter.onStart()
+        Mockito.verify(api).getCategories()
+        Mockito.verify(mealCategoryDao, Mockito.times(2)).getCategories()
+        Mockito.verify(view).showCategories(list)
+    }
 
     @Test
     fun testOpenCategory() {
