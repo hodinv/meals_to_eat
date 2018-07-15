@@ -5,15 +5,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.hodinv.mealstoeat.model.entity.Meal
 import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.screen.categories.CategoriesContract
 import com.hodinv.mealstoeat.screen.categories.CategoriesFragment
 import com.hodinv.mealstoeat.screen.meal.MealContract
 import com.hodinv.mealstoeat.screen.mealslist.MealsListContract
+import com.hodinv.mealstoeat.screen.mealslist.MealsListFragment
 
 class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListContract.Router, MealContract.Router {
-    override fun openCategory(category: MealCategory) {
+    override fun openMeal(meal: Meal) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun openCategory(category: MealCategory) {
+        startFragmentWithStacking(MealsListFragment.getInstance(category))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

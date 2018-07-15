@@ -19,12 +19,12 @@ class CategoryAdapter(val onDetail: (category: MealCategory)->Unit) : ListAdapte
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MealCategory>() {
-            override fun areItemsTheSame(oldUser: MealCategory?, newUser: MealCategory?): Boolean {
-                return oldUser?.idCategory == newUser?.idCategory;
+            override fun areItemsTheSame(oldMealCategory: MealCategory?, newMealCategory: MealCategory?): Boolean {
+                return oldMealCategory?.idCategory == newMealCategory?.idCategory;
             }
 
-            override fun areContentsTheSame(oldUser: MealCategory?, newUser: MealCategory?): Boolean {
-                return oldUser?.equals(newUser) ?: false
+            override fun areContentsTheSame(oldMealCategory: MealCategory?, newMealCategory: MealCategory?): Boolean {
+                return oldMealCategory?.equals(newMealCategory) ?: false
             }
 
         }

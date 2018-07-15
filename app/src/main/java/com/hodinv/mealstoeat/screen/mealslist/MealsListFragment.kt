@@ -1,13 +1,29 @@
 package com.hodinv.mealstoeat.screen.mealslist
 
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.hodinv.mealstoeat.R
+import com.hodinv.mealstoeat.model.entity.Meal
 import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.model.repository.DatabaseProvider
 import com.hodinv.mealstoeat.mvp.BaseMvpFragment
+import kotlinx.android.synthetic.main.fragment_categories.*
 
 class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContract.Router, MealsListContract.Presenter>(), MealsListContract.View {
 
+    val adapter = MealsAdapter({ presenter?.mealSelected(it) })
+
+    override fun showMeals(meals: List<Meal>) {
+        adapter.submitList(meals)
+    }
+
     override fun createPresenter(): MealsListContract.Presenter {
-        return MealsListPresenter(DatabaseProvider.instance)
+        return MealsListPresenter(
+                DatabaseProvider.instance,
+                arguments?.getInt(KEY_CATEGORY_ID) ?: 0)
     }
 
     override fun getMvpView(): MealsListContract.View {
@@ -16,6 +32,29 @@ class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContr
 
     override fun getRouter(): MealsListContract.Router {
         return activity as MealsListContract.Router
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return LayoutInflater.from(activity).inflate(R.layout.fragment_meals_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        list.setHasFixedSize(true)
+        list.adapter = adapter
+        list.layoutManager = LinearLayoutManager(activity)
+    }
+
+    companion object {
+        val KEY_CATEGORY_ID = "categoryIf"
+
+        fun getInstance(category: MealCategory): MealsListFragment {
+            return MealsListFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(KEY_CATEGORY_ID, category.idCategory)
+                }
+            }
+        }
     }
 
 }
