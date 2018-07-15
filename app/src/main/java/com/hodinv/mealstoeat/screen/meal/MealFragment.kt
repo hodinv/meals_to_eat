@@ -1,6 +1,7 @@
 package com.hodinv.mealstoeat.screen.meal
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,11 @@ import com.hodinv.mealstoeat.utils.GlideApp
 import kotlinx.android.synthetic.main.fragment_meal.*
 
 class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, MealContract.Presenter>(), MealContract.View {
+
+    val adapter = IngredientsAdapter()
+
     override fun showMeal(meal: Meal) {
-        mealDescription.text = meal.strInstructions
+        adapter.setInfo(meal.strInstructions, meal.getIngredients())
         GlideApp.with(this)
                 .load(meal.strMealThumb)
                 .centerInside()
@@ -47,6 +51,13 @@ class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, Mea
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return LayoutInflater.from(activity).inflate(R.layout.fragment_meal, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        infoItems.setHasFixedSize(false)
+        infoItems.adapter = adapter
+        infoItems.layoutManager = LinearLayoutManager(activity)
     }
 
     companion object {

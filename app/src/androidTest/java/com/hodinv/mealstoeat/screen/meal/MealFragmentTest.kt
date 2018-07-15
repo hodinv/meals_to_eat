@@ -20,7 +20,13 @@ class MealFragmentTest {
     val presenterMock = Mockito.mock(MealContract.Presenter::class.java)
     lateinit var fragment: MealFragment
 
-    val meal = Meal(1, "NameOfMeal", "", strInstructions = "Some instructions")
+    val meal = Meal(1, "NameOfMeal", "", strInstructions = "Some instructions",
+            strIngredient1 = "ingr1",
+            strIngredient2 = "ingr2",
+            strMeasure1 = "measure1",
+            strMeasure2 = "measure2",
+            strMeasure3 = "measure3"
+    )
 
     @Rule
     @JvmField
@@ -54,5 +60,18 @@ class MealFragmentTest {
         Espresso.onView(ViewMatchers.withText(meal.strInstructions)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
-    // TODO: check for ingrideent
+
+    @Test
+    fun testIngredietsShown() {
+        UiThreadStatement.runOnUiThread {
+            fragment.showMeal(meal)
+        }
+
+        Espresso.onView(ViewMatchers.withText(meal.strIngredient1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(meal.strIngredient2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(meal.strMeasure1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(meal.strMeasure2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(meal.strMeasure3)).check(ViewAssertions.doesNotExist());
+    }
+
 }
