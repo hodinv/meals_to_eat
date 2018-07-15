@@ -4,7 +4,6 @@ import com.hodinv.mealstoeat.model.entity.CategoriesResponse
 import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.model.network.MealsApi
 import com.hodinv.mealstoeat.model.repository.MealCategoryDao
-import com.hodinv.mealstoeat.model.repository.Repository
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import org.junit.Before

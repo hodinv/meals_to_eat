@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.hodinv.mealstoeat.R
 import com.hodinv.mealstoeat.model.entity.Meal
 import com.hodinv.mealstoeat.model.entity.MealCategory
+import com.hodinv.mealstoeat.model.network.NetworkProvider
 import com.hodinv.mealstoeat.model.repository.DatabaseProvider
 import com.hodinv.mealstoeat.mvp.BaseMvpFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
@@ -22,8 +23,9 @@ class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContr
 
     override fun createPresenter(): MealsListContract.Presenter {
         return MealsListPresenter(
-                DatabaseProvider.instance,
-                arguments?.getInt(KEY_CATEGORY_ID) ?: 0)
+                DatabaseProvider.instance.getMealDao(),
+                NetworkProvider.instance.getMealApi(),
+                arguments?.getString(KEY_CATEGORY_NAME) ?: "")
     }
 
     override fun getMvpView(): MealsListContract.View {
@@ -46,12 +48,12 @@ class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContr
     }
 
     companion object {
-        val KEY_CATEGORY_ID = "categoryIf"
+        val KEY_CATEGORY_NAME = "categoryName"
 
         fun getInstance(category: MealCategory): MealsListFragment {
             return MealsListFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(KEY_CATEGORY_ID, category.idCategory)
+                    putString(KEY_CATEGORY_NAME, category.strCategory)
                 }
             }
         }

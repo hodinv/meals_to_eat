@@ -5,7 +5,7 @@ import com.hodinv.mealstoeat.mvp.BaseMvpFragment
 
 class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, MealContract.Presenter>(), MealContract.View {
     override fun createPresenter(): MealContract.Presenter {
-        return MealPresenter(DatabaseProvider.instance)
+        return MealPresenter()
     }
 
     override fun getMvpView(): MealContract.View {

@@ -5,12 +5,15 @@ import android.content.Context
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
-class DatabaseProvider
-private constructor(context: Context): Repository {
+class DatabaseProvider private constructor(context: Context) {
+    fun getMealDao(): MealDao {
+        return db.getMealDao()
+    }
 
-    override fun getMealCategoryDao(): MealCategoryDao {
+    fun getMealCategoryDao(): MealCategoryDao {
         return db.getMealCategoryDao()
     }
+
 
     /**
      * Settings for Room database

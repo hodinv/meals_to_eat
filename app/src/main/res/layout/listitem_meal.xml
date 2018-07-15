@@ -23,7 +23,8 @@
             android:layout_gravity="center_vertical|start"
             android:layout_marginStart="104dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            tools:text="Vegetarian"
+            tools:text="Vegetarian kjshdkj asdlkjf askjf ahskd faskjdf "
+            android:layout_marginEnd="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView

@@ -7,11 +7,10 @@ import android.arch.persistence.room.PrimaryKey
 data class Meal (
         @PrimaryKey(autoGenerate = false)
         val idMeal: Int,
-        var idCategory: Int,
         val strMeal: String,
         val strMealThumb: String,
+        var strCategory: String? = null,
         val strArea: String? = null,
-        val strCategory: String? = null,
         val strIngredient1: String? = null,
         val strIngredient2: String? = null,
         val strIngredient3: String? = null,
