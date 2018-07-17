@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.hodinv.mealstoeat.R
@@ -15,6 +17,9 @@ import com.hodinv.mealstoeat.utils.GlideApp
 import kotlinx.android.synthetic.main.fragment_meal.*
 
 class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, MealContract.Presenter>(), MealContract.View {
+    override fun showYouTube(show: Boolean) {
+        imageUtube.visibility = if (show) VISIBLE else GONE
+    }
 
     val adapter = IngredientsAdapter()
 
@@ -22,9 +27,10 @@ class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, Mea
         adapter.setInfo(meal.strInstructions, meal.getIngredients())
         GlideApp.with(this)
                 .load(meal.strMealThumb)
-                .centerInside()
+                .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(mealImage)
+        imageUtube.setOnClickListener { presenter?.playYouTube(meal) }
     }
 
     override fun createPresenter(): MealContract.Presenter {

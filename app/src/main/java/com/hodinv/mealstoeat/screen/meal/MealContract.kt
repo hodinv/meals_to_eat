@@ -7,9 +7,14 @@ import com.hodinv.mealstoeat.mvp.MvpView
 
 interface MealContract {
     interface View: MvpView {
-        fun showMeal(meal: Meal);
+        fun showMeal(meal: Meal)
+        fun showYouTube(show: Boolean)
     }
-    interface Router: MvpRouter
+    interface Router: MvpRouter {
+        fun playYouTube(url: String)
+    }
 
-    interface Presenter: MvpPresenter<View, Router>
+    interface Presenter: MvpPresenter<View, Router> {
+        fun playYouTube(meal: Meal)
+    }
 }

@@ -13,8 +13,24 @@ import com.hodinv.mealstoeat.screen.meal.MealContract
 import com.hodinv.mealstoeat.screen.meal.MealFragment
 import com.hodinv.mealstoeat.screen.mealslist.MealsListContract
 import com.hodinv.mealstoeat.screen.mealslist.MealsListFragment
+import android.widget.Toast
+import android.content.ActivityNotFoundException
+import android.net.Uri
+
 
 class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListContract.Router, MealContract.Router {
+    override fun playYouTube(url: String) {
+        try {
+            val webpage = Uri.parse(url)
+            val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+            startActivity(myIntent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "No application to play youtube link.", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+
+    }
+
     override fun openMeal(meal: Meal) {
         startFragmentWithStacking(MealFragment.getInstance(meal))
     }
