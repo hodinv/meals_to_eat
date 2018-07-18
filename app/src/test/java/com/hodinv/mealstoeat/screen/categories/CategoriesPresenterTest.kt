@@ -14,19 +14,19 @@ import java.io.IOException
 
 class CategoriesPresenterTest {
 
-    lateinit var presenter: CategoriesPresenter
-    lateinit var api: MealsApi
-    lateinit var router: CategoriesContract.Router
+    private lateinit var presenter: CategoriesPresenter
+    private lateinit var api: MealsApi
+    private lateinit var router: CategoriesContract.Router
     lateinit var view: CategoriesContract.View
-    lateinit var mealCategoryDao: MealCategoryDao
+    private lateinit var mealCategoryDao: MealCategoryDao
 
-    val list = listOf(
+    private val list = listOf(
             MealCategory(1, "Cat1", "", ""),
             MealCategory(2, "Cat2", "", ""),
             MealCategory(3, "Cat3", "", "")
     )
 
-    val resposne = CategoriesResponse(
+    val response = CategoriesResponse(
             arrayOf(
                     MealCategory(1, "Cat1", "", ""),
                     MealCategory(4, "Cat4", "", "")
@@ -58,15 +58,15 @@ class CategoriesPresenterTest {
 
     @Test
     fun testUpdateOnStart() {
-        Mockito.`when`(api.getCategories()).thenReturn(Observable.just(resposne))
+        Mockito.`when`(api.getCategories()).thenReturn(Observable.just(response))
         Mockito.`when`(mealCategoryDao.getCategories()).thenReturn(Flowable.just(list))
         presenter.onStart()
         Mockito.verify(api).getCategories()
         Mockito.verify(mealCategoryDao, Mockito.times(2)).getCategories()
         Mockito.verify(mealCategoryDao).deleteCategoryById(2)
         Mockito.verify(mealCategoryDao).deleteCategoryById(3)
-        Mockito.verify(mealCategoryDao).update(resposne.categories[0])
-        Mockito.verify(mealCategoryDao).addCategory(resposne.categories[1])
+        Mockito.verify(mealCategoryDao).update(response.categories[0])
+        Mockito.verify(mealCategoryDao).addCategory(response.categories[1])
     }
 
 

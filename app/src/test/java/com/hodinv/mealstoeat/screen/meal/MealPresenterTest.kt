@@ -20,13 +20,13 @@ import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
 
 class MealPresenterTest {
-    lateinit var presenter: MealPresenter
-    lateinit var api: MealsApi
-    lateinit var router: MealContract.Router
+    private lateinit var presenter: MealPresenter
+    private lateinit var api: MealsApi
+    private lateinit var router: MealContract.Router
     lateinit var view: MealContract.View
-    lateinit var mealDao: MealDao
+    private lateinit var mealDao: MealDao
 
-    val meal = Meal(1, "Meal name", "", "category1")
+    private val meal = Meal(1, "Meal name", "", "category1")
 
     @Before
     fun prepare() {

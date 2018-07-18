@@ -1,6 +1,5 @@
 package com.hodinv.mealstoeat.screen.meal
 
-import android.text.TextUtils
 import com.hodinv.mealstoeat.model.entity.Meal
 import com.hodinv.mealstoeat.model.network.MealsApi
 import com.hodinv.mealstoeat.model.repository.MealDao
@@ -10,8 +9,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.zipWith
 import io.reactivex.schedulers.Schedulers
 
-class MealPresenter(val dao: MealDao,
-                    val api: MealsApi,
+class MealPresenter(private val dao: MealDao,
+                    private val api: MealsApi,
                     val idMeal: Int) :
         BaseMvpPresenter<MealContract.View, MealContract.Router>(), MealContract.Presenter {
     override fun playYouTube(meal: Meal) {
@@ -30,7 +29,7 @@ class MealPresenter(val dao: MealDao,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     view?.showMeal(it)
-                    view?.showYouTube(!TextUtils.isEmpty(it.strYoutube))
+                    view?.showYouTube(it.strYoutube?.length?:0 > 0)
                 }
 
         apiSubscription = api.getMeal(idMeal)
@@ -38,7 +37,7 @@ class MealPresenter(val dao: MealDao,
                 .subscribeOn(Schedulers.io())
                 .zipWith(dao.getMeal(idMeal).toObservable())
                 .subscribe({
-                    if (it.first.meals.size > 0) {
+                    if (it.first.meals.isNotEmpty()) {
                         dao.update(it.first.meals[0])
                     }
 

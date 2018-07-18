@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_categories.*
 
 open class CategoriesFragment : BaseMvpFragment<CategoriesContract.View, CategoriesContract.Router, CategoriesContract.Presenter>(), CategoriesContract.View {
 
-    val adapter = CategoryAdapter({ presenter?.categorySelected(it) })
+    private val adapter = CategoryAdapter({ presenter?.categorySelected(it) })
 
     override fun showCategories(categories: List<MealCategory>) {
         adapter.submitList(categories)

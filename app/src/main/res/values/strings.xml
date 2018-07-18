@@ -3,4 +3,5 @@
     <string name="base_path">https://www.themealdb.com/api/json/v1/1/</string>
     <string name="title_categories">Meals To Eat :: Select category</string>
     <string name="title_meals">Meals To Eat :: Select meal</string>
+    <string name="error_not_player">No application to play youtube link.</string>
 </resources>

@@ -26,7 +26,7 @@ class CategoriesFragmentTest {
     val presenterMock = Mockito.mock(CategoriesContract.Presenter::class.java)
     lateinit var fragment: CategoriesFragment
 
-    val list =  listOf(
+    private val list =  listOf(
             MealCategory(1, "Cat1", "", ""),
             MealCategory(2, "Cat2", "", ""),
             MealCategory(3, "Cat3", "", "")
@@ -52,17 +52,17 @@ class CategoriesFragmentTest {
     @Test
     fun testShowData() {
         fragment.showCategories(list)
-        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Thread.sleep(5000)
-        for (pos in 0..list.size - 1) {
-            Espresso.onView(ViewMatchers.withText(list[pos].strCategory)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        for (pos in 0 until list.size) {
+            Espresso.onView(ViewMatchers.withText(list[pos].strCategory)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         }
     }
 
     @Test
     fun testClick() {
         fragment.showCategories(list)
-        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Thread.sleep(5000)
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.categoryName), ViewMatchers.withText(list[0].strCategory))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.categoryName), ViewMatchers.withText(list[0].strCategory))).perform(ViewActions.click())

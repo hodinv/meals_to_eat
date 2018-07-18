@@ -9,8 +9,8 @@ import io.reactivex.rxkotlin.zipWith
 import io.reactivex.schedulers.Schedulers
 
 class MealsListPresenter(
-        val dao: MealDao,
-        val api: MealsApi,
+        private val dao: MealDao,
+        private val api: MealsApi,
         val categoryName: String) :
         BaseMvpPresenter<MealsListContract.View, MealsListContract.Router>(), MealsListContract.Presenter {
 
@@ -34,7 +34,7 @@ class MealsListPresenter(
                 .subscribeOn(Schedulers.io())
                 .zipWith(dao.getMeals(categoryName).toObservable())
                 .subscribe( {
-                    var listToRemove = ArrayList<Int>()
+                    val listToRemove = ArrayList<Int>()
 
                     for(oldItem in it.second) {
                         var has = false

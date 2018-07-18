@@ -2,7 +2,6 @@ package com.hodinv.mealstoeat.model.network
 
 import android.content.Context
 import com.hodinv.mealstoeat.R
-import com.hodinv.mealstoeat.model.repository.DatabaseProvider
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

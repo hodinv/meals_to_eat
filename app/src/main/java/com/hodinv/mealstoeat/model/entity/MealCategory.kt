@@ -10,5 +10,5 @@ data class MealCategory(
         val strCategory: String,
         val strCategoryThumb: String,
         val strCategoryDescription: String
-){}
+)
 

@@ -2,8 +2,6 @@ package com.hodinv.mealstoeat.model.repository
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 
 class DatabaseProvider private constructor(context: Context) {
     fun getMealDao(): MealDao {

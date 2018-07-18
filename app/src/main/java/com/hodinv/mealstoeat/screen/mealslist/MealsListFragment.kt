@@ -11,11 +11,11 @@ import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.model.network.NetworkProvider
 import com.hodinv.mealstoeat.model.repository.DatabaseProvider
 import com.hodinv.mealstoeat.mvp.BaseMvpFragment
-import kotlinx.android.synthetic.main.fragment_categories.*
+import kotlinx.android.synthetic.main.fragment_meals_list.*
 
 class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContract.Router, MealsListContract.Presenter>(), MealsListContract.View {
 
-    val adapter = MealsAdapter({ presenter?.mealSelected(it) })
+    private val adapter = MealsAdapter({ presenter?.mealSelected(it) })
 
     override fun showMeals(meals: List<Meal>) {
         adapter.submitList(meals)
@@ -54,7 +54,7 @@ class MealsListFragment : BaseMvpFragment<MealsListContract.View, MealsListContr
     }
 
     companion object {
-        val KEY_CATEGORY_NAME = "categoryName"
+        const val KEY_CATEGORY_NAME = "categoryName"
 
         fun getInstance(category: MealCategory): MealsListFragment {
             return MealsListFragment().apply {

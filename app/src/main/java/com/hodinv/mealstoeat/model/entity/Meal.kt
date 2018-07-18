@@ -2,7 +2,6 @@ package com.hodinv.mealstoeat.model.entity
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.util.StringUtil
 import android.text.TextUtils
 
 @Entity

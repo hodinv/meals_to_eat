@@ -7,10 +7,8 @@ import com.hodinv.mealstoeat.mvp.BaseMvpPresenter
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.zipWith
 import io.reactivex.schedulers.Schedulers
-import java.util.*
-import kotlin.collections.ArrayList
 
-class CategoriesPresenter(val dao: MealCategoryDao, val api: MealsApi) :
+class CategoriesPresenter(private val dao: MealCategoryDao, private val api: MealsApi) :
         BaseMvpPresenter<CategoriesContract.View, CategoriesContract.Router>(), CategoriesContract.Presenter {
 
 
@@ -34,7 +32,7 @@ class CategoriesPresenter(val dao: MealCategoryDao, val api: MealsApi) :
                 .subscribeOn(Schedulers.io())
                 .zipWith(dao.getCategories().toObservable())
                 .subscribe( {
-                    var listToRemove = ArrayList<Int>()
+                    val listToRemove = ArrayList<Int>()
 
                     for(oldItem in it.second) {
                         var has = false

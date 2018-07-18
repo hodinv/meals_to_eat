@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import com.hodinv.mealstoeat.R
 import com.hodinv.mealstoeat.model.entity.Meal
 
-class MealsAdapter(val onDetail: (meal: Meal) -> Unit) : ListAdapter<Meal, MealsViewHolder>(DIFF_CALLBACK) {
+class MealsAdapter(private val onDetail: (meal: Meal) -> Unit) : ListAdapter<Meal, MealsViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsViewHolder {
         return MealsViewHolder(
-                LayoutInflater.from(parent?.context).inflate(R.layout.listitem_meal, parent, false), onDetail)
+                LayoutInflater.from(parent.context).inflate(R.layout.listitem_meal, parent, false), onDetail)
     }
 
     override fun onBindViewHolder(holder: MealsViewHolder, position: Int) {
@@ -20,7 +20,7 @@ class MealsAdapter(val onDetail: (meal: Meal) -> Unit) : ListAdapter<Meal, Meals
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Meal>() {
             override fun areItemsTheSame(oldMeal: Meal?, newMeal: Meal?): Boolean {
-                return oldMeal?.idMeal == newMeal?.idMeal;
+                return oldMeal?.idMeal == newMeal?.idMeal
             }
 
             override fun areContentsTheSame(oldMeal: Meal?, newMeal: Meal?): Boolean {

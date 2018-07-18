@@ -2,7 +2,6 @@ package com.hodinv.mealstoeat.mvp
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 
 abstract class BaseMvpFragment<V : MvpView, Router : MvpRouter, P : MvpPresenter<V, Router>> : Fragment() {
 
@@ -12,7 +11,7 @@ abstract class BaseMvpFragment<V : MvpView, Router : MvpRouter, P : MvpPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (presenter == null) {
-            // incase we alrady mock presnter we do not need to recreate it
+            // in case we already mock presenter we do not need to recreate it
             presenter = createPresenter()
         }
     }

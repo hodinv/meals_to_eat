@@ -29,7 +29,7 @@ class MealsListFragmentTest {
 
     val category = MealCategory(1, "", "", "")
 
-    val list = listOf(
+    private val list = listOf(
             Meal(1, "Meal1", ""),
             Meal(2, "Meal2", ""),
             Meal(3, "Meal3", "")
@@ -55,17 +55,17 @@ class MealsListFragmentTest {
     @Test
     fun testShowData() {
         fragment.showMeals(list)
-        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Thread.sleep(5000)
-        for (pos in 0..list.size - 1) {
-            Espresso.onView(ViewMatchers.withText(list[pos].strMeal)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        for (pos in 0 until list.size) {
+            Espresso.onView(ViewMatchers.withText(list[pos].strMeal)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         }
     }
 
     @Test
     fun testClick() {
         fragment.showMeals(list)
-        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Thread.sleep(5000)
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.mealName), ViewMatchers.withText(list[0].strMeal))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.mealName), ViewMatchers.withText(list[0].strMeal))).perform(ViewActions.click())

@@ -20,14 +20,14 @@ import android.view.MenuItem
 
 
 class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListContract.Router, MealContract.Router {
-    var stack = false
+    private var stack = false
     override fun playYouTube(url: String) {
         try {
             val webpage = Uri.parse(url)
             val myIntent = Intent(Intent.ACTION_VIEW, webpage)
             startActivity(myIntent)
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "No application to play youtube link.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.error_not_player), Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
 
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListCo
      * Adds current fragment ot back stack and shows new fragment
      * @param newFragment fragment to show
      */
-    fun startFragmentWithStacking(newFragment: Fragment) {
+    private fun startFragmentWithStacking(newFragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, newFragment).addToBackStack(null)
         transaction.commit()
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListCo
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() === android.R.id.home) {
+        if (item.itemId === android.R.id.home) {
             if(stack) {
                 onBackPressed()
             }
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListCo
     }
     companion object {
 
-        val EXTRA_TESTING = "testing"
+        const val EXTRA_TESTING = "testing"
 
         fun testingIntent(context: Context): Intent {
             val intent = Intent(context, MainActivity::class.java)

@@ -13,14 +13,14 @@ import org.mockito.Mockito
 import java.io.IOException
 
 class MealsListPresenterTest {
-    lateinit var presenter: MealsListPresenter
-    lateinit var api: MealsApi
-    lateinit var router: MealsListContract.Router
+    private lateinit var presenter: MealsListPresenter
+    private lateinit var api: MealsApi
+    private lateinit var router: MealsListContract.Router
     lateinit var view: MealsListContract.View
-    lateinit var mealDao: MealDao
-    val category = MealCategory(1, "Cat1", "", "")
+    private lateinit var mealDao: MealDao
+    private val category = MealCategory(1, "Cat1", "", "")
 
-    val list = listOf(
+    private val list = listOf(
             Meal(1, "Meal1", "", "Cat1"),
             Meal(2, "Meal2", "", "Cat1"),
             Meal(3, "Meal3", "", "Cat1")

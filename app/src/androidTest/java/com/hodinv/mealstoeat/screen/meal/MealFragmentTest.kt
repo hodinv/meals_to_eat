@@ -48,7 +48,7 @@ class MealFragmentTest {
 
     @Test
     fun testProperTitle() {
-        Espresso.onView(withId(R.id.mealImage)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withId(R.id.mealImage)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Assert.assertEquals(meal.strMeal, mActivityRule.activity.title)
     }
 
@@ -57,21 +57,21 @@ class MealFragmentTest {
         UiThreadStatement.runOnUiThread {
             fragment.showMeal(meal)
         }
-        Espresso.onView(ViewMatchers.withText(meal.strInstructions)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(meal.strInstructions)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
 
     @Test
-    fun testIngredietsShown() {
+    fun testIngredientsShown() {
         UiThreadStatement.runOnUiThread {
             fragment.showMeal(meal)
         }
 
-        Espresso.onView(ViewMatchers.withText(meal.strIngredient1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withText(meal.strIngredient2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withText(meal.strMeasure1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withText(meal.strMeasure2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withText(meal.strMeasure3)).check(ViewAssertions.doesNotExist());
+        Espresso.onView(ViewMatchers.withText(meal.strIngredient1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText(meal.strIngredient2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText(meal.strMeasure1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText(meal.strMeasure2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withText(meal.strMeasure3)).check(ViewAssertions.doesNotExist())
     }
 
 }

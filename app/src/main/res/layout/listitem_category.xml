@@ -15,7 +15,6 @@
             android:layout_width="96dp"
             android:id="@+id/categoryImage"
             android:layout_marginStart="4dp"
-            tools:src="@drawable/ic_launcher_background"
             android:layout_gravity="center_vertical|start"
             android:layout_height="72dp" />
         <TextView

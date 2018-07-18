@@ -18,10 +18,10 @@ import kotlinx.android.synthetic.main.fragment_meal.*
 
 class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, MealContract.Presenter>(), MealContract.View {
     override fun showYouTube(show: Boolean) {
-        imageUtube.visibility = if (show) VISIBLE else GONE
+        imageYoutube.visibility = if (show) VISIBLE else GONE
     }
 
-    val adapter = IngredientsAdapter()
+    private val adapter = IngredientsAdapter()
 
     override fun showMeal(meal: Meal) {
         adapter.setInfo(meal.strInstructions, meal.getIngredients())
@@ -30,7 +30,7 @@ class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, Mea
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(mealImage)
-        imageUtube.setOnClickListener { presenter?.playYouTube(meal) }
+        imageYoutube.setOnClickListener { presenter?.playYouTube(meal) }
     }
 
     override fun createPresenter(): MealContract.Presenter {
@@ -67,8 +67,8 @@ class MealFragment : BaseMvpFragment<MealContract.View, MealContract.Router, Mea
     }
 
     companion object {
-        val KEY_MEAL_NAME = "mealName"
-        val KEY_MEAL_ID = "mealId"
+        const val KEY_MEAL_NAME = "mealName"
+        const val KEY_MEAL_ID = "mealId"
 
         fun getInstance(meal: Meal): MealFragment {
             return MealFragment().apply {

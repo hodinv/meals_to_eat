@@ -14,7 +14,7 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientsViewHolder {
         return IngredientsViewHolder(
-                LayoutInflater.from(parent?.context).inflate(
+                LayoutInflater.from(parent.context).inflate(
                         (if (viewType == 0) R.layout.listitem_info else R.layout.listitem_ingredient)
                         , parent, false))
 
