@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hodinv.mealstoeat.MainActivity
 import com.hodinv.mealstoeat.R
 import com.hodinv.mealstoeat.model.entity.MealCategory
 import com.hodinv.mealstoeat.model.network.NetworkProvider
@@ -35,6 +36,7 @@ open class CategoriesFragment : BaseMvpFragment<CategoriesContract.View, Categor
     override fun onResume() {
         super.onResume()
         activity?.setTitle(R.string.title_categories)
+        (activity as MainActivity).resetStack()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

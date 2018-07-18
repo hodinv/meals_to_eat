@@ -19,7 +19,6 @@ class IngredientsViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         view.name.text = ingredient.name
         view.measure.text = ingredient.measure
         val url = "https://www.themealdb.com/images/ingredients/" +ingredient.name.replace(" ", "%20") + "-Small.png"
-        Log.d("URL", url)
         GlideApp.with(view)
                 .load(url)
                 .fitCenter()

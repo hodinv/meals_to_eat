@@ -16,9 +16,11 @@ import com.hodinv.mealstoeat.screen.mealslist.MealsListFragment
 import android.widget.Toast
 import android.content.ActivityNotFoundException
 import android.net.Uri
+import android.view.MenuItem
 
 
 class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListContract.Router, MealContract.Router {
+    var stack = false
     override fun playYouTube(url: String) {
         try {
             val webpage = Uri.parse(url)
@@ -55,8 +57,13 @@ class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListCo
     fun startFragment(newFragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, newFragment)
-
         transaction.commit()
+        resetStack()
+    }
+
+    fun resetStack() {
+        stack = false
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     /**
@@ -67,8 +74,19 @@ class MainActivity : AppCompatActivity(), CategoriesContract.Router, MealsListCo
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, newFragment).addToBackStack(null)
         transaction.commit()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        stack = true
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.getItemId() === android.R.id.home) {
+            if(stack) {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     companion object {
 
         val EXTRA_TESTING = "testing"
